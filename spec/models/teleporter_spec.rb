@@ -3,9 +3,13 @@ require 'spec_helper'
 describe Teleporter do
   
 	it { should validate_presence_of :name }
+  it { should validate_presence_of :departure_id }
+  it { should validate_presence_of :destination_id }
   it { should validate_presence_of :departure_date }
   it { should validate_uniqueness_of(:name).scoped_to(:departure_date) }
 
+  it { should belong_to :departure }
+  it { should belong_to :destination }
   it { should have_many :bookings }
   it { should have_many :passengers }
 

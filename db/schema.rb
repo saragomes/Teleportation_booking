@@ -19,14 +19,10 @@ ActiveRecord::Schema.define(version: 20140504041858) do
   create_table "bookings", force: true do |t|
     t.integer  "passenger_id"
     t.integer  "teleporter_id"
-    t.integer  "departure_id"
-    t.integer  "destination_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "bookings", ["departure_id"], name: "index_bookings_on_departure_id", using: :btree
-  add_index "bookings", ["destination_id"], name: "index_bookings_on_destination_id", using: :btree
   add_index "bookings", ["passenger_id"], name: "index_bookings_on_passenger_id", using: :btree
   add_index "bookings", ["teleporter_id"], name: "index_bookings_on_teleporter_id", using: :btree
 
@@ -47,9 +43,14 @@ ActiveRecord::Schema.define(version: 20140504041858) do
 
   create_table "teleporters", force: true do |t|
     t.string   "name"
+    t.integer  "departure_id"
+    t.integer  "destination_id"
     t.datetime "departure_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "teleporters", ["departure_id"], name: "index_teleporters_on_departure_id", using: :btree
+  add_index "teleporters", ["destination_id"], name: "index_teleporters_on_destination_id", using: :btree
 
 end

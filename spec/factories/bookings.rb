@@ -4,7 +4,5 @@ FactoryGirl.define do
   factory :booking do
   	passenger
   	teleporter
-  	departure
-  	destination
   end
 end

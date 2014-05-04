@@ -11,6 +11,7 @@ gem 'mysql2'
 gem 'rake'
 
 gem 'bootstrap-datepicker-rails'
+gem 'best_in_place'
 gem 'bootstrap-will_paginate'
 
 # Use jquery as the JavaScript library
