@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :passenger do
-    first_name "MyString"
-    last_name "MyString"
-    email "MyString"
+    sequence(:first_name) {|n| "first_name_#{n}"}
+	sequence(:last_name) {|n| "last_name_#{n}"}
+    sequence(:email) {|n| "MyString#{n}@teleportation.com"}
   end
 end

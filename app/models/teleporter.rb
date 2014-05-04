@@ -7,10 +7,10 @@ class Teleporter < ActiveRecord::Base
 	has_many :bookings
 	has_many :passengers, through: :bookings
 
-  def departure_date_cannot_be_in_the_past
-    if departure_date.present? && departure_date < Date.today
-      errors.add(:departure_date, "can't be in the past")
-    end
+	def departure_date_cannot_be_in_the_past
+		if departure_date.present? && departure_date < Date.today
+			errors.add(:departure_date, "can't be in the past")
+		end
 	end
 
 	def busy?

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140504024151) do
+ActiveRecord::Schema.define(version: 20140504041858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,11 +19,16 @@ ActiveRecord::Schema.define(version: 20140504024151) do
   create_table "bookings", force: true do |t|
     t.integer  "passenger_id"
     t.integer  "teleporter_id"
-    t.integer  "departure_point"
-    t.integer  "destination_point"
+    t.integer  "departure_id"
+    t.integer  "destination_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "bookings", ["departure_id"], name: "index_bookings_on_departure_id", using: :btree
+  add_index "bookings", ["destination_id"], name: "index_bookings_on_destination_id", using: :btree
+  add_index "bookings", ["passenger_id"], name: "index_bookings_on_passenger_id", using: :btree
+  add_index "bookings", ["teleporter_id"], name: "index_bookings_on_teleporter_id", using: :btree
 
   create_table "passengers", force: true do |t|
     t.string   "first_name"
@@ -35,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140504024151) do
 
   create_table "places", force: true do |t|
     t.string   "name"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

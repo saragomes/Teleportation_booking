@@ -9,38 +9,71 @@ describe Teleporter do
   it { should have_many :bookings }
   it { should have_many :passengers }
 
+  describe "Departure date_cannot be in the past" do
+    let(:teleporter) { FactoryGirl.build :teleporter }
+    subject { teleporter }
 
-  let(:teleporter) { FactoryGirl.build :teleporter }
-  subject { teleporter }
+    context "when departure_date is before the current time" do
+      it {should_not allow_value(1.day.ago).
+          for(:departure_date)}
+    end
 
-  context "when departure_date is before the current time" do
-    it {should_not allow_value(1.day.ago).
-        for(:departure_date)}
+    context "when the departure_date is after the start_date" do
+      it {should allow_value(teleporter.departure_date + 1.day).
+          for(:departure_date)}
+    end
   end
 
-  context "when the departure_date is after the start_date" do
-    it {should allow_value(teleporter.departure_date + 1.day).
-        for(:departure_date)}
+
+  describe "Busy?" do
+    before do
+      @teleporter1 = FactoryGirl.create(:teleporter)
+      @teleporter2 = FactoryGirl.create(:teleporter)
+      @booking1 = FactoryGirl.create(:booking, teleporter: @teleporter1)
+      @booking2 = FactoryGirl.create(:booking, teleporter: @teleporter2)
+      @booking3 = FactoryGirl.create(:booking, teleporter: @teleporter1)
+    end
+
+    context "when is not busy - 3th reservations" do
+      it "should return false" do
+        @teleporter1.busy?.should === false
+      end
+    end
+
+    context "when is not busy - 3th reservations" do
+      before do
+        @booking4 = FactoryGirl.create(:booking, teleporter: @teleporter1)
+      end
+      it "should return false" do
+        @teleporter1.busy?.should === true
+      end
+    end
   end
 
-  # describe "today_task" do
-  #   before do
-  #     @user1 = FactoryGirl.create(:user)
-  #     @user2 = FactoryGirl.create(:user)
-  #     @task1 = FactoryGirl.create(:task, :date => Date.yesterday, :done => false, :user => @user1)
-  #     @task2 = FactoryGirl.create(:task, :date => Date.today, :done => false, :user => @user1)
-  #     @task3 = FactoryGirl.create(:task, :date => Date.today, :done => true, :user => @user1)
-  #     @task4 = FactoryGirl.create(:task, :date => Date.tomorrow, :done => false, :user => @user2)
-  #     @task5 = FactoryGirl.create(:task, :date => Date.today, :done => false, :user => @user2)
-  #     @task6 = FactoryGirl.create(:task, :date => Date.today, :done => true, :user => @user2)
-  #   end
-  #   context "When task is late" do
-  #     it "user1 should have 1 today task" do
-  #       @user1.today_tasks.should === [@task2]
-  #     end
-  #     it "should not be late" do
-  #       @user2.today_tasks.should === [@task5]
-  #     end
-  #   end
-  # end
+
+  describe "Available?" do
+    before do
+      @teleporter1 = FactoryGirl.create(:teleporter)
+      @teleporter2 = FactoryGirl.create(:teleporter)
+      @booking1 = FactoryGirl.create(:booking, teleporter: @teleporter1)
+      @booking2 = FactoryGirl.create(:booking, teleporter: @teleporter2)
+      @booking3 = FactoryGirl.create(:booking, teleporter: @teleporter1)
+    end
+
+    context "when is available - 2th reservations" do
+      it "should return false" do
+        @teleporter1.available?.should === true
+      end
+    end
+
+    context "when is not available - 3th reservations" do
+      before do
+        @booking4 = FactoryGirl.create(:booking, teleporter: @teleporter1)
+      end
+      it "should return false" do
+        @teleporter1.available?.should === false
+      end
+    end
+  end
+
 end

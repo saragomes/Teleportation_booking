@@ -1,0 +1,1 @@
+class Departure < Place; end

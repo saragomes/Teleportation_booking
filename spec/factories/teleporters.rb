@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :teleporter do
-    name "MyString"
-    departure_date "2014-05-04 03:39:15"
+    sequence(:name) {|n| "teleporter_name_#{n}"}
+    departure_date Time.now
   end
 end
