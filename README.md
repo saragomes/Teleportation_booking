@@ -17,3 +17,15 @@ If a teleported is busy, since is 2092 and there are no privacy issues, anyone s
 
 Blue Origins does not allow waste, so a person could register only one place in the teleporter with his/her name.
 
+
+
+Startup the project
+
+rake db:reset
+
+rake db:seed
+
+
+And That's It ;)
+
+I LOVE RAILS!!!
