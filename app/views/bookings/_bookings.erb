@@ -23,15 +23,10 @@
       <tr>
         <% path = "/bookings/#{booking.id}" %>
         <td><%= link_to booking.id, booking_path(booking) %></td>
-        <td><%= booking.name %></td>
-        <td>
-            <% booking.passenger.each do |passenger| %>
-              <%= passenger.first_name %> <%= passenger.last_name %></br>
-            <% end %>
-        </td>
-        <td><%= booking.departure.name %></td>
-        <td><%= booking.destination.name %></td>
-        <td><%=l booking.created at %></td>
+        <td><%= booking.passenger.first_name %></td>
+        <td><%= booking.teleporter.departure.name %></td>
+        <td><%= booking.teleporter.name %></td>
+        <td><%=l booking.created_at %></td>
         <td>
           <a href="#" class='btn btn-mini btn-danger' onclick="remove_resource('bookings', <%= booking.id %>);">
             <i class="icon-remove-sign"> </i>
