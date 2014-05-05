@@ -39,10 +39,15 @@
         <td><%= teleporter.destination.name %></td>
         <td><%=l teleporter.departure_date %></td>
         <td>
-          <a href="#" class='btn btn-mini btn-danger' onclick="remove_resource('teleporters', <%= teleporter.id %>);">
-            <i class="icon-remove-sign"> </i>
-            <%= t('.destroy', :default => t("helpers.links.destroy")) %>
-          </a>
+          <% if teleporter.busy? %>
+            <a href="teleporter/<%= teleporter.id %>" class='btn btn-mini btn-danger'>
+              <i class="icon-remove-sign"> </i>Busy
+            </a>
+          <% else %>
+            <a href="/teleporters/<%= teleporter.id %>/bookings/new" class='btn btn-mini'>
+              <i class="icon-remove-sign"> </i>Available
+            </a>
+            <% end %>
         </td>
       </tr>
     <% end %>

@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   resources :teleporters, only: [:index, :search, :find, :search, :show] do
     get :find, :on => :collection
     get :search, :on => :collection
+    resources :bookings, only: [:new]
   end
 
-  resources :bookings, only: [:new, :index, :create, :show, :find] 
+  resources :bookings, only: [:index, :show, :find, :create]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
