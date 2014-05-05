@@ -18,21 +18,9 @@
 //= require turbolinks
 //= require_tree .
 
-$('#form').live('ajax:beforeSend', function(evt, xhr, settings){
-  // prevent double submit
-  $(':submit', this).click(function() {
-    return false;
-  });
-});
-
-$(document).on("focus", "[data-behaviour~='datepicker']", function(e){
-    $(this).datepicker({dateFormat: 'dd-mm-yy'}); 
-});
-
-jQuery(function($){
-  $.datepicker.setDefaults({ dateFormat: 'dd-mm-yy' }); 
-}); 
-
+$(document).ready(function(){
+  $('[data-behaviour~=datepicker]').datepicker();
+})
 
 $('#select-all').click(function (event) {
   var selected = this.checked;

@@ -1,0 +1,17 @@
+<%- model_class = Booking -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+
+<!-- Add, Filter and Search -->
+<div class="row">
+  <div class="span9">
+    <!--<button type="select" class="btn" href="#add_popup" data-toggle="modal" ,
+        class='btn btn-primary'><i class="icon-plus"></i> Add</button>-->
+  </div>
+  <div class="span3">
+  </div>
+  <%#= render "shared/search" %>
+</div>
+
+<div id="bookings"><%= render 'bookings' %></div>

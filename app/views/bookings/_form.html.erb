@@ -1,11 +1,14 @@
 <!-- Form booking -->
-<%= form_for @booking = Booking.new do |f| %>
+<%#= form_tag("/find", method: "get") do %>
+
+<% form_tag({controller: "teleporters", action: "search"}, method: "get", class: "nifty_form") %>
+
   <div class="modal-body">
-    <% if @booking.errors.any? %>
+    <% if @teleporter.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+        <h2><%= pluralize(@teleporter.errors.count, "error") %> prohibited this teleporter from being saved:</h2>
         <ul>
-        <% @booking.errors.full_messages.each do |msg| %>
+        <% @teleporter.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
         </ul>
@@ -13,20 +16,24 @@
     <% end %>
 
     <div class="field">
-      <%= f.text_field :departure_id, {placeholder: 'Departure Point'} %>
-    </div>
-    
-    <div class="field">
-      <%= f.text_field :destination_id, {placeholder: 'Destination Point'} %>
-    </div>
-    
-    <div class="field">
-      <%= f.text_field :teleporter_id, {placeholder: "Teleporter"} %>
+      <%= collection_select :departure, Departure.all, :id, :name, {prompt: "De"}, {:class => "multiselect"} %>
     </div>
 
     <div class="field">
-      <%= f.text_field :passenger_id, {placeholder: "Passenger"} %>
+      <%= collection_select :destination, Destination.all, :id, :name, {prompt: "A"}, {:class => "multiselect"} %>
     </div>
+
+    <div class="field">
+       <%= text_field :book, :date, {:placeholder => "Date", 'data-behaviour' =>'datepicker'} %>
+    </div>
+
+    <div class="input-daterange" data-behaviour='datepicker' id="datepicker">
+   <input type="text" class="input-small" name="start" />
+   <span class="add-on">to</span>
+   <input type="text" class="input-small" name="end" />
+</div>
+
+    
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" data-dismiss="modal">Close</a>

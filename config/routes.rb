@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
 
-  resources :bookings, :only => [:new, :index, :create, :show] do
+  resources :teleporters, only: [:index, :search, :find, :search, :show] do
     get :find, :on => :collection
+    get :search, :on => :collection
   end
+
+  resources :bookings, only: [:new, :index, :create, :show, :find] 
 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'bookings#new'
+  root 'teleporters#find'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

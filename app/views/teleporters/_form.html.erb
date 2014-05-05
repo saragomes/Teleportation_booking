@@ -1,0 +1,34 @@
+<!-- Form teleporter -->
+<%= form_tag("/teleporters/search", method: "get") do %>
+  <div class="modal-body">
+    <% if @teleporter.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@teleporter.errors.count, "error") %> prohibited this teleporter from being saved:</h2>
+        <ul>
+        <% @teleporter.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= collection_select :book, :departure, Departure.all, :id, :name, {prompt: "Departure point"}, {:class => "multiselect"} %>
+    </div>
+
+    <div class="field">
+      <%= collection_select :book, :destination, Destination.all, :id, :name, {prompt: "Destination point"}, {:class => "multiselect"} %>
+    </div>
+
+    <div class="input-daterange" data-behaviour='datepicker' id="datepicker">
+    <input type="text" class="input-small" name="start"  prompt="Start date" />
+    <span class="add-on">to</span>
+    <input type="text" class="input-small" name="end"  prompt="End date" />
+
+</div>
+    
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary"><i class="icon-plus"></i> Find</button>
+  </div>
+<% end %>

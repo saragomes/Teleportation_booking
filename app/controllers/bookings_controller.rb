@@ -3,20 +3,13 @@ class BookingsController < ApplicationController
   respond_to :html, :json
 
   def index
-  	#TODO:: Includes Performance
-    @bookings = Booking.all
+    @bookings = Booking.all.includes(:passenger)
+    @bookings = @bookings.paginate(:per_page => 20, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @bookings }
     end
-  end
-
-  def new
-  	@booking = Booking.new
-  end
-
-  def find
   end
 
   def create
@@ -27,7 +20,7 @@ class BookingsController < ApplicationController
         format.html { redirect_to(:bookings, :notice => 'Registration successfull.') }
         format.json { render json: @booking, status: :created, location: @booking }
       else
-        format.html { render "booking_sessions/new" }
+        format.html { render "booking/new" }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end

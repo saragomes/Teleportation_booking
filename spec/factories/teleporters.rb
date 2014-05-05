@@ -5,6 +5,6 @@ FactoryGirl.define do
     sequence(:name) {|n| "teleporter_name_#{n}"}
     departure
   	destination
-    departure_date Time.now+10.second
+    departure_date Time.now + 10.second
   end
 end
