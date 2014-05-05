@@ -20,7 +20,7 @@ class Teleporter < ActiveRecord::Base
 	end
 
 	def departure_date_cannot_be_in_the_past
-		if departure_date.present? && departure_date < Time.now
+		if departure_date.present? && departure_date < Time.now.utc
 			errors.add(:departure_date, "can't be in the past")
 		end
 	end

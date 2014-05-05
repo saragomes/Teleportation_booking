@@ -13,17 +13,19 @@
     <% end %>
 
     <div class="field">
-      <%= collection_select :book, :departure, Departure.all, :id, :name, {prompt: "Departure point"}, {:class => "multiselect"} %>
+      <%= collection_select :book, :departure, Departure.all, :id, :name, 
+                            {:prompt => 'Departure point', :require => true}, 
+                            {:class => 'multiselect'} %>
     </div>
 
     <div class="field">
-      <%= collection_select :book, :destination, Destination.all, :id, :name, {prompt: "Destination point"}, {:class => "multiselect"} %>
+      <%= collection_select :book, :destination, Destination.all, :id, :name, {:prompt => 'Destination point', :require => true}, {:class => 'multiselect'} %>
     </div>
 
-    <div class="input-daterange" data-behaviour='datepicker' id="datepicker">
-    <input type="text" class="input-small" name="start"  prompt="Start date" />
-    <span class="add-on">to</span>
-    <input type="text" class="input-small" name="end"  prompt="End date" />
+    <div class='input-daterange' data-behaviour='datepicker' id='datepicker'>
+    <input type='text' class='input-small' name='start'  prompt='Start date' />
+    <span class='add-on'>to</span>
+    <input type='text' class='input-small' name='end'  prompt='End date' />
 
 </div>
     
