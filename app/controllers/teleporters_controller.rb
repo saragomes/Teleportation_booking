@@ -21,9 +21,9 @@ class TeleportersController < ApplicationController
   def search
   	@teleporters = Teleporter.all.where(departure_id:   params[:book][:departure])
                                  .where(destination_id: params[:book][:destination])
+                                 .where(departure_date: params[:start].to_date..params[:end].to_date)
                                  .order(:departure_date)
-                                 .includes(:departure, :destination, :bookings)
-                                 #.where(departure_date: Date.today - Date.today)
+                                 .includes(:departure, :destination, :bookings)                                 
     @teleporters = @teleporters.paginate(:per_page => 20, :page => params[:page])
 #
     respond_to do |format|
@@ -40,8 +40,7 @@ class TeleportersController < ApplicationController
         format.html { redirect_to(:teleporters, :notice => 'Registration successfull.') }
         format.json { render json: @teleporter, status: :created, location: @teleporter }
       else
-        format.html { render "teleporter_sessions/new" }
-        format.json { render json: @teleporter.errors, status: :unprocessable_entity }
+        format.html { redirect_to("teleporter_sessions/new", :notice => ' error.')}
       end
     end
   end
