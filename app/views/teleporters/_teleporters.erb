@@ -40,7 +40,7 @@
         <td><%=l teleporter.departure_date %></td>
         <td>
           <% if teleporter.busy? %>
-            <a href="teleporter/<%= teleporter.id %>" class='btn btn-mini btn-danger'>
+            <a href="<%= teleporter_path(teleporter) %>" class='btn btn-mini btn-danger'>
               <i class="icon-remove-sign"> </i>Busy
             </a>
           <% else %>

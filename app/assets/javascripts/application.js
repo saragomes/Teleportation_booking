@@ -18,9 +18,13 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function(){
-  $('[data-behaviour~=datepicker]').datepicker();
-})
+$(document).on("focus", "[data-behaviour~='datepicker']", function(e){
+    $(this).datepicker({dateFormat: 'dd-mm-yy'}); 
+});
+
+jQuery(function($){
+  $.datepicker.setDefaults({ dateFormat: 'dd-mm-yy' }); 
+}); 
 
 $('#select-all').click(function (event) {
   var selected = this.checked;

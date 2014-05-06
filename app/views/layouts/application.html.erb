@@ -4,7 +4,14 @@
     <title>Booking Application</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag "application"%>
+    <%= javascript_include_tag "application" %>
     <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css", "application" %>
+    <%= javascript_include_tag "application" %>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
   </head>
   <body>
     <!-- Navbar -->
@@ -49,7 +56,5 @@
       <%= yield %>
     </div>
     <!-- FIN conteneur central -->
-
-    <%= javascript_include_tag "application" %>
   </body>
 </html>

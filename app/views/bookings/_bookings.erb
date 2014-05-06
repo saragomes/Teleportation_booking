@@ -15,7 +15,6 @@
       <th scope="col">
         Created on</button>
       </th>
-      <th scope="col"><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
@@ -27,12 +26,6 @@
         <td><%= booking.teleporter.departure.name %></td>
         <td><%= booking.teleporter.name %></td>
         <td><%=l booking.created_at %></td>
-        <td>
-          <a href="#" class='btn btn-mini btn-danger' onclick="remove_resource('bookings', <%= booking.id %>);">
-            <i class="icon-remove-sign"> </i>
-            <%= t('.destroy', :default => t("helpers.links.destroy")) %>
-          </a>
-        </td>
       </tr>
     <% end %>
   </tbody>

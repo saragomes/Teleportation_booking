@@ -7,6 +7,8 @@ class Teleporter < ActiveRecord::Base
 
 	validate  :refuse_same_departure_and_destination
 
+	validate  :full
+
 	belongs_to :departure, class_name: "Departure"
 	belongs_to :destination, class_name: "Destination"
 
@@ -24,6 +26,7 @@ class Teleporter < ActiveRecord::Base
 			errors.add(:departure_date, "can't be in the past")
 		end
 	end
+	
 
 	def busy?
 		bookings.size >= 3

@@ -1,5 +1,7 @@
 class BookingsController < ApplicationController
 
+  layout 'application'
+  
   before_filter :initialize, only: [:index, :new]
   respond_to :html, :json
 
@@ -19,25 +21,21 @@ class BookingsController < ApplicationController
   end
 
   def create
-    puts "hereeeeeeeeeeeeeeeeeeeee"+params[:teleporter_id].inspect
-    teleporter_id = params[:teleporter_id]
-    result = Booking.already_reserved_by_passenger?(params[:email], teleporter_id)
-    
-    render "/teleporters/#{@teleporter.id}/bookings/new" && return if result
+    @teleporter = Teleporter.find(params[:teleporter_id])
+    @passenger = Passenger.find_or_create_by(email: params[:email], 
+                                             first_name: params[:first_name],
+                                             last_name: params[:last_name])
 
-    @passenger = Passenger.create(first_name: params[:first_name],
-                                   last_name: params[:last_name], 
-                                   email: params[:email])
-      
+
     @booking = Booking.new(passenger:     @passenger,
-                           teleporter_id: teleporter_id)
+                           teleporter_id: @teleporter.id) 
 
     respond_to do |format|
       if @booking.save
         format.html { redirect_to(:bookings, :notice => 'Registration successfull.') }
         format.json { render json: @booking, status: :created, location: @booking }
       else
-        format.html { render "/teleporters/@teleporter.id/bookings/new" }
+        format.html { redirect_to(controller: :bookings, action: :new, teleporter_id: 3)}
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end
