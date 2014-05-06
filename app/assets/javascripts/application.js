@@ -31,3 +31,22 @@ $('#select-all').click(function (event) {
   $(':checkbox').each(function () {    this.checked = selected; });
 });
 
+ $(function() {
+	$( "#start" ).datepicker({
+		defaultDate: "+1w",
+		changeMonth: true,
+		numberOfMonths: 3,
+		onClose: function( selectedDate ) {
+			$( "#start" ).datepicker( "option", "minDate", selectedDate );
+		}
+		});
+		$( "#end" ).datepicker({
+		defaultDate: "+1w",
+		changeMonth: true,
+		numberOfMonths: 3,
+		onClose: function( selectedDate ) {
+			$( "#end" ).datepicker( "option", "maxDate", selectedDate );
+		}
+	});
+});
+

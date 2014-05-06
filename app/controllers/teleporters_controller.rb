@@ -23,7 +23,7 @@ class TeleportersController < ApplicationController
                                  .where(destination_id: params[:book][:destination])
                                  .order(:departure_date)
                                  .includes(:departure, :destination, :bookings)
-                                 #.where(departure_date: params[:start] - params[:end])
+                                 #.where(departure_date: Date.today - Date.today)
     @teleporters = @teleporters.paginate(:per_page => 20, :page => params[:page])
 #
     respond_to do |format|

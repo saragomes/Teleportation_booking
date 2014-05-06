@@ -22,11 +22,9 @@
       <%= collection_select :book, :destination, Destination.all, :id, :name, {:prompt => 'Destination point', :require => true}, {:class => 'multiselect'} %>
     </div>
 
-    <div class='input-daterange' 'data-behaviour'='datepicker'>
-      <%= text_field_tag :date, nil, {name: 'start', placeholder: "Start date", class: 'input-small', 'data-behaviour' =>'datepicker'} %> 
+      <%= text_field_tag :date, nil, {name: 'start', placeholder: "Start date", id: 'start', class: 'input-small', 'data-behaviour' =>'datepicker'} %> 
       <span class='add-on'>to</span>
-      <%= text_field_tag :date, nil, {name: 'end', placeholder: "End date", class: 'input-small', 'data-behaviour' =>'datepicker'} %> 
-    </div>
+      <%= text_field_tag :date, nil, {name: 'end', placeholder: "End date", id: 'end', class: 'input-small', 'data-behaviour' =>'datepicker'} %> 
     
   </div>
   <div class="modal-footer">
